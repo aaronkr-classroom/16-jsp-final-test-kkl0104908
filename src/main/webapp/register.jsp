@@ -15,16 +15,49 @@
 
     <!-- CSS 파일에 대한 link테그를 수정하십시오 -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/public/css/style.css" />
-    <link
-      rel="stylesheet"
-      media="(max-width: 768px)"
-      href="${pageContext.request.contextPath}/public/css/style.small.css"
-    />
+    <link rel="stylesheet" media="(max-width: 768px)" href="${pageContext.request.contextPath}/public/css/style.small.css" />
     <link href="${pageContext.request.contextPath}/public/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/public/css/confetti.css" />
-
+    
     <!-- JS 파일에 대한 script테그를 수정하십시오 -->
     <script defer src="${pageContext.request.contextPath}/public/js/functions.js"></script>
+  	<script type="text/javascript">
+      function validateForm() {
+        var name = document.getElementById("floatingName").value;
+        var email = document.getElementById("floatingEmail").value;
+        var phone = document.getElementById("floatingPhone").value;
+        var password = document.querySelector("input[name='password']").value;
+
+        // 정규 표현식
+        var regExpName = /^[가-힣a-zA-Z ]+$/;
+        var regExpEmail = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,3}$/;
+        var regExpPhone = /^\d{3}-\d{3,4}-\d{4}$/;
+        var regExpPassword = /^[A-Za-z0-9]{6,}$/;
+
+        // 검증
+        if (!regExpName.test(name)) {
+          alert("이름은 한글 또는 영문만 입력해주세요.");
+          return false;
+        }
+
+        if (!regExpEmail.test(email)) {
+          alert("유효한 이메일 주소를 입력해주세요.");
+          return false;
+        }
+
+        if (!regExpPhone.test(phone)) {
+          alert("연락처는 000-0000-0000 형식으로 입력해주세요.");
+          return false;
+        }
+
+        if (!regExpPassword.test(password)) {
+          alert("비밀번호는 영문, 숫자 포함 최소 6자 이상 입력해주세요.");
+          return false;
+        }
+
+        return true; // 폼 제출 허용
+      }
+    </script>
   </head>
 
   <body>
@@ -53,6 +86,7 @@
               class="p-4 p-md-5 border rounded-3 bg-light"
               action="./thanks.jsp"
               method="POST"
+              onsubmit="return validateForm();"
             >
               <div class="form-floating mb-3">
                 <input

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+  <!-- 사용자 역할 설정 -->
+  <security-role>
+    <role-name>role1</role-name>
+  </security-role>
+
+  <!-- 보안 제약 조건 설정 -->
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Secure Area</web-resource-name>
+      <url-pattern>/secure/*</url-pattern>
+      <http-method>GET</http-method>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>role1</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <!-- 로그인 및 인증 설정 -->
+  <login-config>
+    <auth-method>FORM</auth-method>
+    <form-login-config>
+      <form-login-page>/login.jsp</form-login-page>
+      <form-error-page>/login_failed.jsp</form-error-page>
+    </form-login-config>
+  </login-config>
+</web-app>
